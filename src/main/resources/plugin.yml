@@ -1,7 +1,7 @@
 name: WitherShop
 version: '1.0.0'
 main: dev.withershop.WitherShopPlugin
-api-version: '26.2'
+api-version: '1.21'
 author: YourName
 description: Earn a point for every Wither you kill and spend points in a rotating 9-item shop.
 
