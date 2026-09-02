@@ -1,0 +1,20 @@
+name: WitherShop
+version: '1.0.0'
+main: dev.withershop.WitherShopPlugin
+api-version: '26.2'
+author: YourName
+description: Earn a point for every Wither you kill and spend points in a rotating 9-item shop.
+
+commands:
+  shop:
+    description: Open the Wither Shop.
+    usage: /shop
+  points:
+    description: Check your Wither points, or (OP only) give points to a player.
+    usage: /points [give <player> <amount>]
+  pay:
+    description: Send some of your Wither points to another online player.
+    usage: /pay <player> <amount>
+  shoprestock:
+    description: Force the Wither Shop to restock immediately (OP only).
+    usage: /shoprestock
