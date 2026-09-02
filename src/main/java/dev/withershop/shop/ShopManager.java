@@ -88,8 +88,8 @@ public class ShopManager {
         addItem(Material.ENCHANTED_GOLDEN_APPLE, 12, 1);
         addItem(Material.NETHER_STAR, 15, 1);
         addItem(Material.BEACON, 18, 1);
-        addItem(Material.DRAGON_EGG, 20, 1);
         addItem(Material.NETHERITE_BLOCK, 25, 1);
+        additem(material.ELYTRA, 50, 1);
         // Elytra intentionally excluded - it never shows up in the shop.
     }
 
