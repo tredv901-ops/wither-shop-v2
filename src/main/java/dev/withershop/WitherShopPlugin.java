@@ -41,5 +41,8 @@ public class WitherShopPlugin extends JavaPlugin {
             pointsManager.save();
         }
         getLogger().info("WitherShop disabled - points saved.");
+        public void addPoints(java.util.UUID uuid, int amount) {
+    if (pointsManager != null) {
+        pointsManager.addPoints(uuid, amount);
     }
 }
