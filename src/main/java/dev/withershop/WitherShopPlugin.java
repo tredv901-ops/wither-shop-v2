@@ -36,13 +36,10 @@ public class WitherShopPlugin extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-        if (pointsManager != null) {
-            pointsManager.save();
-        }
-        getLogger().info("WitherShop disabled - points saved.");
-        public void addPoints(java.util.UUID uuid, int amount) {
+public void addPoints(java.util.UUID uuid, int amount) {
     if (pointsManager != null) {
         pointsManager.addPoints(uuid, amount);
+        }
+        getLogger().info("WitherShop disabled - points saved.");
     }
 }
