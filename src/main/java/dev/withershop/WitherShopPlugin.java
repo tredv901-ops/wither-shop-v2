@@ -10,6 +10,8 @@ import dev.withershop.points.PointsManager;
 import dev.withershop.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.UUID;
+
 public class WitherShopPlugin extends JavaPlugin {
 
     private PointsManager pointsManager;
