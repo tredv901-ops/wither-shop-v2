@@ -35,11 +35,18 @@ public class WitherShopPlugin extends JavaPlugin {
         getLogger().info("WitherShop enabled - kill Withers, earn points, spend them with /shop.");
     }
 
-    @Override
-public void addPoints(java.util.UUID uuid, int amount) {
-    if (pointsManager != null) {
-        pointsManager.addPoints(uuid, amount);
+@Override
+    public void onDisable() {
+        if (pointsManager != null) {
+            pointsManager.save();
         }
         getLogger().info("WitherShop disabled - points saved.");
+    }
+
+    // Public helper so other classes can give points
+    public void addPoints(UUID uuid, int amount) {
+        if (pointsManager != null) {
+            pointsManager.addPoints(uuid, amount);
+        }
     }
 }
