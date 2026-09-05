@@ -1,3 +1,4 @@
+```java
 package dev.withershop.commands;
 
 import dev.withershop.bounty.BountyManager;
@@ -26,7 +27,10 @@ public class BountyListCommand implements CommandExecutor {
         Map<UUID, Integer> all = bountyManager.getAllBounties();
 
         if (all.isEmpty()) {
-            sender.sendMessage(Component.text("There are currently no active bounties.", NamedTextColor.GRAY));
+            sender.sendMessage(Component.text(
+                    "There are currently no active bounties.",
+                    NamedTextColor.GRAY
+            ));
             return true;
         }
 
@@ -34,9 +38,31 @@ public class BountyListCommand implements CommandExecutor {
         List<Map.Entry<UUID, Integer>> sorted = new ArrayList<>(all.entrySet());
         sorted.sort(Map.Entry.<UUID, Integer>comparingByValue().reversed());
 
-        sender.sendMessage(Component.text("===== Active Bounties =====", NamedTextColor.DARK_RED).decorate(TextDecoration.BOLD));
+        sender.sendMessage(
+                Component.text("===== Active Bounties =====", NamedTextColor.DARK_RED)
+                        .decorate(TextDecoration.BOLD)
+        );
 
         int rank = 1;
+
         for (Map.Entry<UUID, Integer> entry : sorted) {
             OfflinePlayer target = Bukkit.getOfflinePlayer(entry.getKey());
-            String name = target.getName() != null ? target.getName() : 
+
+            String name = target.getName() != null
+                    ? target.getName()
+                    : "Unknown";
+
+            sender.sendMessage(
+                    Component.text(
+                            "#" + rank + " " + name + " - $" + entry.getValue(),
+                            NamedTextColor.RED
+                    )
+            );
+
+            rank++;
+        }
+
+        return true;
+    }
+}
+```
