@@ -21,7 +21,6 @@ import java.util.UUID;
 
 public class BountyCompassCommand implements CommandExecutor {
 
-```
 private final JavaPlugin plugin;
 private final BountyManager bountyManager;
 
@@ -162,7 +161,4 @@ private void startCompassTracker(Player hunter) {
             0L,
             20L
     );
-}
-```
-
 }
