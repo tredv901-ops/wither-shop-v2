@@ -66,18 +66,23 @@ public class BountyCommand implements CommandExecutor {
         bountyManager.addBounty(target.getUniqueId(), amount);
         int totalBounty = bountyManager.getBounty(target.getUniqueId());
 
-        player.sendMessage(
-                Component.text("✔ Placed a bounty of ", NamedTextColor.GREEN)
-                        .append(Component.text(amount + " points", NamedTextColor.YELLOW))
-                        .append(Component.text(" on ", NamedTextColor.GREEN))
+        // Always announce the bounty placement
+        Bukkit.broadcast(
+                Component.text("☠ ", NamedTextColor.DARK_RED)
+                        .append(Component.text(player.getName(), NamedTextColor.YELLOW))
+                        .append(Component.text(" placed a bounty of ", NamedTextColor.GRAY))
+                        .append(Component.text(amount + " points", NamedTextColor.GOLD))
+                        .append(Component.text(" on ", NamedTextColor.GRAY))
                         .append(Component.text(target.getName(), NamedTextColor.RED))
+                        .append(Component.text("!", NamedTextColor.GRAY))
         );
 
+        // Extra announcement if the total is now 100 or higher
         if (totalBounty >= 100) {
             Bukkit.broadcast(
                     Component.text("☠ HIGH BOUNTY ☠ ", NamedTextColor.DARK_RED).decorate(TextDecoration.BOLD)
                             .append(Component.text(target.getName(), NamedTextColor.YELLOW))
-                            .append(Component.text(" now has a bounty of ", NamedTextColor.GRAY))
+                            .append(Component.text(" now has a total bounty of ", NamedTextColor.GRAY))
                             .append(Component.text(totalBounty + " points!", NamedTextColor.GOLD))
             );
         }
