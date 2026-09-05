@@ -1,4 +1,3 @@
-```java
 package dev.withershop.commands;
 
 import dev.withershop.bounty.BountyManager;
