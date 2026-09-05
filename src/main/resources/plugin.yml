@@ -21,3 +21,12 @@ commands:
   pointsbal:
     description: Show the richest players
     usage: /pointsbal
+  bountyplace:
+    description: Place a bounty on a player
+    usage: /bountyplace <player> <amount>
+  bountylist:
+    description: View all active bounties
+    usage: /bountylist
+  bountycompass:
+    description: Get a compass that tracks high bounties (100+)
+    usage: /bountycompass
