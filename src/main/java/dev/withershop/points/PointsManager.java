@@ -89,9 +89,6 @@ public class PointsManager {
         points.merge(uuid, amount, Integer::sum);
         save();
     }
-    public Map<UUID, Integer> getAllPoints() {
-    return new HashMap<>(points);
-}
     /**
      * @return true if the player had enough points and they were deducted.
      */
