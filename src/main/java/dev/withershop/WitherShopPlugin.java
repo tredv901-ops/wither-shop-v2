@@ -10,7 +10,7 @@ import dev.withershop.listeners.PlayerDeathListener;   // ← add this line
 import dev.withershop.points.PointsManager;
 import dev.withershop.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
+import dev.withershop.commands.PointsBalCommand;
 import java.util.UUID;
 
 public class WitherShopPlugin extends JavaPlugin {
