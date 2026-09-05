@@ -160,5 +160,6 @@ private void startCompassTracker(Player hunter) {
             },
             0L,
             20L
-    );
+        return true;
+    }
 }
