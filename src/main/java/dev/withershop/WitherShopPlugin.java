@@ -16,6 +16,7 @@ import dev.withershop.bounty.BountyManager;
 import dev.withershop.commands.BountyCommand;
 import dev.withershop.commands.BountyListCommand;
 import dev.withershop.commands.BountyCompassCommand;
+import dev.withershop.listeners.BountyDeathListener;
 
 public class WitherShopPlugin extends JavaPlugin {
 
