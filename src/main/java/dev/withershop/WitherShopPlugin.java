@@ -39,7 +39,7 @@ public class WitherShopPlugin extends JavaPlugin {
             getCommand("bountylist").setExecutor(new BountyListCommand(bountyManager));
         }
         if (getCommand("bountycompass") != null) {
-            getCommand("bountycompass").setExecutor(new BountyCompassCommand(bountyManager));
+            getCommand("bountycompass").setExecutor(new BountyCompassCommand(this, bountyManager));
         }
         getServer().getPluginManager().registerEvents(new BountyDeathListener(bountyManager, pointsManager), this);
         var shopExecutor = new ShopCommand(shopManager);
