@@ -71,7 +71,14 @@ public class PointsManager {
     public void addPoint(UUID uuid) {
         addPoints(uuid, 1);
     }
-
+/**
+ * Gives a random amount of points between 1 and 10 (inclusive)
+ * for killing a Wither.
+ */
+    public void addRandomWitherPoints(UUID uuid) {
+        int amount = java.util.concurrent.ThreadLocalRandom.current().nextInt(1, 11); // 1–10
+        addPoints(uuid, amount);
+    }
     /**
      * Adds an arbitrary number of points (e.g. from /pay or /points give) and
      * immediately persists, so transfers survive a crash, not just a clean shutdown.
