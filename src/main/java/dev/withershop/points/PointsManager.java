@@ -101,4 +101,11 @@ public class PointsManager {
         save();
         return true;
     }
+/**
+ * Sets a player's points to an exact amount.
+ */
+public void setPoints(UUID uuid, int amount) {
+    points.put(uuid, amount);
+    save();
+}
 }
