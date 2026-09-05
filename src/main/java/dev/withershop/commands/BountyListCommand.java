@@ -64,4 +64,3 @@ public class BountyListCommand implements CommandExecutor {
         return true;
     }
 }
-```
