@@ -10,11 +10,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
- * Awards exactly 1 point to whichever player lands the killing blow on a Wither.
- * Withers are far rarer than Wardens - you have to farm Wither Skeleton skulls,
- * build the summon structure, then survive the boss fight - so this is meant to
- * be a much slower trickle of points than a Warden-based economy would be.
+ * Awards a random amount of points (1–10) to whichever player
+ * lands the killing blow on a Wither.
  */
 public class WitherKillListener implements Listener {
 
@@ -35,13 +35,16 @@ public class WitherKillListener implements Listener {
             return; // Wither didn't die to a direct player hit.
         }
 
-        pointsManager.addPoint(killer.getUniqueId());
+        // Random points between 1 and 10 (inclusive)
+        int amount = ThreadLocalRandom.current().nextInt(1, 11);
+        pointsManager.addPoints(killer.getUniqueId(), amount);
+
         int total = pointsManager.getPoints(killer.getUniqueId());
 
         killer.sendMessage(
                 Component.text("☠ ", NamedTextColor.DARK_GRAY)
                         .append(Component.text("WITHER SLAIN", NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD))
-                        .append(Component.text("  +1 point", NamedTextColor.GREEN))
+                        .append(Component.text("  +" + amount + " point" + (amount == 1 ? "" : "s"), NamedTextColor.GREEN))
                         .append(Component.text("  (total: " + total + ")", NamedTextColor.GRAY))
                         .append(Component.text("  -  spend it with ", NamedTextColor.DARK_GRAY))
                         .append(Component.text("/shop", NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD))
