@@ -6,6 +6,7 @@ import dev.withershop.commands.ShopCommand;
 import dev.withershop.commands.ShopRestockCommand;
 import dev.withershop.listeners.ShopGuiListener;
 import dev.withershop.listeners.WitherKillListener;
+import dev.withershop.listeners.PlayerDeathListener;   // ← add this line
 import dev.withershop.points.PointsManager;
 import dev.withershop.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
