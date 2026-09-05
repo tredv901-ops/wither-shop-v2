@@ -51,4 +51,12 @@ public class WitherShopPlugin extends JavaPlugin {
             pointsManager.addPoints(uuid, amount);
         }
     }
+// Added for KingOfTheHill / TheReaper (and any other plugin that needs to read/remove points)
+    public int getPoints(UUID uuid) {
+        return pointsManager != null ? pointsManager.getPoints(uuid) : 0;
+    }
+
+    public boolean removePoints(UUID uuid, int amount) {
+        return pointsManager != null && pointsManager.removePoints(uuid, amount);
+    }
 }
