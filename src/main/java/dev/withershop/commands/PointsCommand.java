@@ -12,8 +12,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * /points          - check your own balance (any player)
- * /points give <player> <amount> - add points to any player, OPs only
+ * /points                          - check your own balance
+ * /points <player>                 - check another player's balance
+ * /points give <player> <amount>   - give points (OP only)
  */
 public class PointsCommand implements CommandExecutor {
 
@@ -25,15 +26,23 @@ public class PointsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        // /points
         if (args.length == 0) {
             return handleCheckOwnBalance(sender);
         }
 
+        // /points give <player> <amount>
         if (args.length == 3 && args[0].equalsIgnoreCase("give")) {
             return handleGive(sender, args[1], args[2]);
         }
 
-        sender.sendMessage(Component.text("Usage: /points  or  /points give <player> <amount> (OP only)")
+        // /points <player>
+        if (args.length == 1) {
+            return handleCheckOtherBalance(sender, args[0]);
+        }
+
+        sender.sendMessage(Component.text("Usage: /points  |  /points <player>  |  /points give <player> <amount> (OP only)")
                 .color(NamedTextColor.RED));
         return true;
     }
@@ -43,6 +52,7 @@ public class PointsCommand implements CommandExecutor {
             sender.sendMessage("Only players have points.");
             return true;
         }
+
         int total = pointsManager.getPoints(player.getUniqueId());
         player.sendMessage(
                 Component.text("☠ ", NamedTextColor.DARK_GRAY)
@@ -52,7 +62,25 @@ public class PointsCommand implements CommandExecutor {
         return true;
     }
 
-    @SuppressWarnings("deprecation") // Bukkit.getOfflinePlayer(String) - needed to target offline players by name.
+    @SuppressWarnings("deprecation")
+    private boolean handleCheckOtherBalance(CommandSender sender, String targetName) {
+        OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+
+        if (!target.hasPlayedBefore() && !target.isOnline()) {
+            sender.sendMessage(Component.text("Player '" + targetName + "' was not found.").color(NamedTextColor.RED));
+            return true;
+        }
+
+        int total = pointsManager.getPoints(target.getUniqueId());
+        sender.sendMessage(
+                Component.text("☠ ", NamedTextColor.DARK_GRAY)
+                        .append(Component.text(targetName + "'s Wither Points: ", NamedTextColor.GRAY))
+                        .append(Component.text(total, NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD))
+        );
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
     private boolean handleGive(CommandSender sender, String targetName, String amountArg) {
         if (!sender.isOp()) {
             sender.sendMessage(Component.text("Only OPs can give points.").color(NamedTextColor.RED));
@@ -66,6 +94,7 @@ public class PointsCommand implements CommandExecutor {
             sender.sendMessage(Component.text("Amount must be a whole number.").color(NamedTextColor.RED));
             return true;
         }
+
         if (amount <= 0) {
             sender.sendMessage(Component.text("Amount must be positive.").color(NamedTextColor.RED));
             return true;
