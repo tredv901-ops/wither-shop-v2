@@ -38,7 +38,9 @@ public class PointsManager {
         this.config = YamlConfiguration.loadConfiguration(file);
         load();
     }
-
+    public Map<UUID, Integer> getAllPoints() {
+    return new HashMap<>(points);
+}
     private void load() {
         ConfigurationSection section = config.getConfigurationSection("points");
         if (section == null) return;
