@@ -12,20 +12,34 @@ import dev.withershop.shop.ShopManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import dev.withershop.commands.PointsBalCommand;
 import java.util.UUID;
+import dev.withershop.bounty.BountyManager;
+import dev.withershop.commands.BountyCommand;
+import dev.withershop.commands.BountyListCommand;
+import dev.withershop.commands.BountyCompassCommand;
 
 public class WitherShopPlugin extends JavaPlugin {
 
     private PointsManager pointsManager;
     private ShopManager shopManager;
+    private BountyManager bountyManager;
 
     @Override
     public void onEnable() {
         pointsManager = new PointsManager(this);
         shopManager = new ShopManager(this); // starts the hourly restock task itself
-
+        bountyManager = new BountyManager(this);
         getServer().getPluginManager().registerEvents(new WitherKillListener(pointsManager), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(pointsManager), this);
         getServer().getPluginManager().registerEvents(new ShopGuiListener(shopManager, pointsManager), this);
+        if (getCommand("bountyplace") != null) {
+            getCommand("bountyplace").setExecutor(new BountyCommand(bountyManager, pointsManager));
+        }
+        if (getCommand("bountylist") != null) {
+            getCommand("bountylist").setExecutor(new BountyListCommand(bountyManager));
+        }
+        if (getCommand("bountycompass") != null) {
+            getCommand("bountycompass").setExecutor(new BountyCompassCommand(bountyManager));
+        }
 
         var shopExecutor = new ShopCommand(shopManager);
         var pointsExecutor = new PointsCommand(pointsManager);
