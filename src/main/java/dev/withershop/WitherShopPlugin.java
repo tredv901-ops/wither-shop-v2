@@ -23,6 +23,7 @@ public class WitherShopPlugin extends JavaPlugin {
         shopManager = new ShopManager(this); // starts the hourly restock task itself
 
         getServer().getPluginManager().registerEvents(new WitherKillListener(pointsManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathListener(pointsManager), this);
         getServer().getPluginManager().registerEvents(new ShopGuiListener(shopManager, pointsManager), this);
 
         var shopExecutor = new ShopCommand(shopManager);
