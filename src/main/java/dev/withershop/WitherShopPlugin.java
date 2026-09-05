@@ -30,6 +30,11 @@ public class WitherShopPlugin extends JavaPlugin {
         var shopExecutor = new ShopCommand(shopManager);
         var pointsExecutor = new PointsCommand(pointsManager);
         var payExecutor = new PayCommand(pointsManager);
+        var pointsBalExecutor = new PointsBalCommand(pointsManager);
+
+if (getCommand("pointsbal") != null) {
+    getCommand("pointsbal").setExecutor(pointsBalExecutor);
+}
         var shopRestockExecutor = new ShopRestockCommand(shopManager);
         if (getCommand("shop") != null) getCommand("shop").setExecutor(shopExecutor);
         if (getCommand("points") != null) getCommand("points").setExecutor(pointsExecutor);
